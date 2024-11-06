@@ -1,19 +1,19 @@
 import pandas as pd
 import numpy as np
 import seaborn as sns
-import matplotlib.pyplot as plt  # Correct import for matplotlib
+import matplotlib as plt
+df=pd.read_csv("/content/emails.csv")
+df.head()
 
-# Load the dataset
-df = pd.read_csv("/content/emails.csv")
-
-# Display the first few rows and data info
-print(df.head())
 df.info()
 
-# Check if there are any non-numeric columns or missing values in the dataset
-print(df.isnull().sum())
+df.isnull().sum()
 
-# Assuming df has features in all columns except the first and last one, and the last column is the target
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+
+# Assuming `df` is your DataFrame
 X = df.iloc[:, 1:-1].values  # Features (all columns except the first and last)
 y = df.iloc[:, -1].values    # Target (last column)
 
@@ -26,15 +26,15 @@ classifier = KNeighborsClassifier(n_neighbors=5)
 # Train the classifier with the training data
 classifier.fit(X_train, y_train)
 
-# Evaluate the classifier with the test data
+# Optionally, evaluate the classifier with the test data
 accuracy = classifier.score(X_test, y_test)
 print(f"Accuracy: {accuracy:.2f}")
 
 # Predict the labels for the test set
-y_pred = classifier.predict(X_test)
+y_pred = classifier.predict(X_test)  # Use X_test instead of x_test
 
-# Import necessary metrics for evaluation
-from sklearn.metrics import confusion_matrix, accuracy_score, classification_report
+# Import necessary metrics
+from sklearn.metrics import confusion_matrix, accuracy_score
 
 # Compute confusion matrix
 cm = confusion_matrix(y_test, y_pred)
@@ -43,9 +43,10 @@ print(cm)
 
 # Compute accuracy score (optional)
 accuracy = accuracy_score(y_test, y_pred)
-print(f"Accuracy Score: {accuracy:.2f}")
+print(f"Accuracy: {accuracy:.2f}")
 
-# Classification report
-cl_report = classification_report(y_test, y_pred)
-print("Classification Report:")
+from sklearn.metrics import classification_report
+cl_report=classification_report(y_test,y_pred)
 print(cl_report)
+
+print ("Accuracy Score of KNN :",accuracy_score(y_pred,y_test))
