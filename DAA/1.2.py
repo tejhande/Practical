@@ -1,11 +1,17 @@
-def fibonacci_recursive(n):
-    if n <= 0:
-        return 0
-    elif n == 1:
-        return 1
-    else:
-        return fibonacci_recursive(n - 1) + fibonacci_recursive(n - 2)
+def fibonacci_recursive_series(n, series=None):
+    if series is None:
+        series = [0, 1]  # Start with the first two Fibonacci numbers (0 and 1)
+
+    # Base case for recursion
+    if len(series) == n:
+        return series
+    
+    # Recursive case: calculate Fibonacci for n and append to series
+    next_fib = series[-1] + series[-2]
+    series.append(next_fib)
+
+    return fibonacci_recursive_series(n, series)
 
 # Test the function
-n = 10
-print(f"Recursive Fibonacci of {n}:", fibonacci_recursive(n))
+n = int(input("How many nTerms:- "))
+print(f"Fibonacci series up to {n}:", fibonacci_recursive_series(n))
