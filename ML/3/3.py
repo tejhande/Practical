@@ -16,12 +16,12 @@ def gradient_descent(expr, alpha, start, max_iter):
     grad = sym.Derivative(expr, x).doit()  # Compute the gradient (derivative)
     x_val = start
     x_list = [x_val]
-    
+
     for _ in range(max_iter):
         gradient = grad.subs(x, x_val)  # Evaluate the gradient at x_val
         x_val = x_val - (alpha * gradient)  # Update x based on the gradient and alpha
         x_list.append(x_val)
-    
+
     return x_list
 
 # Parameters
